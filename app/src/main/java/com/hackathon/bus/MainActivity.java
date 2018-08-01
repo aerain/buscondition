@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private String searchStr,strStart,strEnd;
     private RecyclerView favoritBus;
     private FavoritBusVo busVO;
-    private Button findBus;
+    private Button findBus,edit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +67,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         findBus=findViewById(R.id.findbus);
         findBus.setOnClickListener(this);
+
+        edit=findViewById(R.id.edit);
+        edit.setOnClickListener(this);
+
     }
     //cutomactionBar설정
     public void cutomActionBar(){
@@ -119,6 +123,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             strEnd=searchEnd.getText().toString();
             intent.putExtra("start",strStart);
             intent.putExtra("end",strEnd);
+            startActivity(intent);
+        }
+        if(v.getId()==R.id.edit){
+            Intent intent=new Intent(this,EditMainActivity.class);
             startActivity(intent);
         }
     }

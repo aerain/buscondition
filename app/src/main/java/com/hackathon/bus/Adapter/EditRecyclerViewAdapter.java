@@ -20,13 +20,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.zip.Inflater;
 
-public class FavoriteRecyclerViewAdapter extends RecyclerView.Adapter<FavoriteRecyclerViewAdapter.FavoriteViewHolder> {
+public class EditRecyclerViewAdapter extends RecyclerView.Adapter<EditRecyclerViewAdapter.FavoriteViewHolder> {
 
     private Context context;
     private FavoritBusVo provider;
-    ImageButton btn;
     private static View itemView;
-    public FavoriteRecyclerViewAdapter(Context context, FavoritBusVo provider){
+    public EditRecyclerViewAdapter(Context context, FavoritBusVo provider){
         this.context=context;
         this.provider=provider;
     }
@@ -43,7 +42,7 @@ public class FavoriteRecyclerViewAdapter extends RecyclerView.Adapter<FavoriteRe
 
         holder.busNumber.setText(provider.getBusNum());
         holder.busInfo.setText(provider.getBusInfo());
-
+        holder.btn.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -55,6 +54,7 @@ public class FavoriteRecyclerViewAdapter extends RecyclerView.Adapter<FavoriteRe
 
         TextView busNumber;
         TextView busInfo;
+        ImageButton btn;
 
 
         public FavoriteViewHolder(View itemView) {
@@ -62,7 +62,6 @@ public class FavoriteRecyclerViewAdapter extends RecyclerView.Adapter<FavoriteRe
             busNumber=itemView.findViewById(R.id.num_bus);
             busInfo=itemView.findViewById(R.id.bus_info);
             btn=itemView.findViewById(R.id.delete);
-            FavoriteRecyclerViewAdapter.itemView=itemView;
         }
 
     }

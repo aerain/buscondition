@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EditMainActivity">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="즐겨찾기 버스"
+        android:id="@+id/text1"/>
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/text1"
+        android:id="@+id/favorite_bus_edit"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:background="@color/lightGray"
+        app:layout_constraintTop_toBottomOf="@id/favorite_bus_edit"
+        android:id="@+id/view3" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="즐겨찾기 정류장"
+        app:layout_constraintTop_toBottomOf="@id/view3"
+        android:id="@+id/text2"/>
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/text2"
+        android:id="@+id/favorite_bus_stop_edit"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:background="@color/lightGray"
+        app:layout_constraintTop_toBottomOf="@id/favorite_bus_stop_edit"
+        android:id="@+id/view4" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="최근 검색 기록"
+        app:layout_constraintTop_toBottomOf="@id/view4"
+        android:id="@+id/text3"/>
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/text3"
+        android:id="@+id/lately_data_edit"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:background="@color/lightGray"
+        app:layout_constraintTop_toBottomOf="@id/lately_data_edit"
+        android:id="@+id/view5" />
+</android.support.constraint.ConstraintLayout>

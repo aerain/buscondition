@@ -24,7 +24,8 @@
             android:label="@string/title_activity_navigator"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".SearchedInfoActivity" />
-        <activity android:name=".SearchedBusActivity"></activity>
+        <activity android:name=".SearchedBusActivity" />
+        <activity android:name=".EditMainActivity"></activity>
     </application>
 
 </manifest>
