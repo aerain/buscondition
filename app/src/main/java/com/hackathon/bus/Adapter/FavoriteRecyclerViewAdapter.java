@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.zip.Inflater;
 
-public class FavoriteRecyclerViewAdapter extends RecyclerView.Adapter<FavoriteRecyclerViewAdapter.FavoriteViewHolder> {
+public class FavoriteRecyclerViewAdapter extends RecyclerView.Adapter<FavoriteRecyclerViewAdapter.FavoriteViewHolder> implements View.OnClickListener {
 
     private Context context;
     private FavoritBusVo provider;
@@ -43,12 +43,20 @@ public class FavoriteRecyclerViewAdapter extends RecyclerView.Adapter<FavoriteRe
 
         holder.busNumber.setText(provider.getBusNum());
         holder.busInfo.setText(provider.getBusInfo());
+        holder.itemView.setOnClickListener(this);
 
     }
 
     @Override
     public int getItemCount() {
         return 1;
+    }
+
+    @Override
+    public void onClick(View v) {
+        RecyclerView.ViewHolder viewHolder=new FavoriteViewHolder(v);
+        int itemPosition= viewHolder.getAdapterPosition();
+
     }
 
     class FavoriteViewHolder extends RecyclerView.ViewHolder{
