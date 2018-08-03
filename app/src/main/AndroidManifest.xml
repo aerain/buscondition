@@ -27,8 +27,7 @@
         <activity android:name=".SearchedBusActivity" />
         <activity android:name=".EditMainActivity" />
 <<<<<<< HEAD
-        <activity android:name=".NowBus_Info"></activity>
-=======
+        =======
         <activity
             android:name=".MenuActivity"
             android:label="@string/title_activity_menu"

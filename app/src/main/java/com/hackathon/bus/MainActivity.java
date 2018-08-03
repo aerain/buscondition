@@ -42,12 +42,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         linearLayout=findViewById(R.id.l1);
         setContentView(R.layout.activity_main);
 
+        favoritBus = (RecyclerView)findViewById(R.id.favorite_bus);
+
+        favoritBus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, NowBus_Info.class);
+                startActivity(intent);
+
+            }
+        });
         cutomActionBar();
         initView();
 
         initRecyclerView();
-
     }
+
+
+
 
     //layout view 설정
     public void initView(){
@@ -132,6 +144,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Intent intent=new Intent(this,EditMainActivity.class);
             startActivity(intent);
         }
+
     }
 
     @Override

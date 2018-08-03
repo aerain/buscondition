@@ -13,7 +13,7 @@
         android:layout_height="191dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintVertical_bias="0.003"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="0dp" />
 
@@ -38,13 +38,24 @@
 
     <TextView
         android:id="@+id/textView"
+        android:layout_width="64dp"
+        android:layout_height="32dp"
+        android:text="버스는"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="236dp"
+        tools:layout_editor_absoluteY="42dp" />
+
+    <TextView
+        android:id="@+id/textView6"
         android:layout_width="44dp"
         android:layout_height="32dp"
         android:text="현재"
         android:textSize="20sp"
         android:textStyle="bold"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="66dp"
+        tools:layout_editor_absoluteX="53dp"
         tools:layout_editor_absoluteY="42dp" />
 
     <TextView
@@ -55,7 +66,31 @@
         android:textSize="20sp"
         android:textStyle="bold"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="157dp"
-        tools:layout_editor_absoluteY="83dp" />
+        tools:layout_editor_absoluteX="186dp"
+        tools:layout_editor_absoluteY="81dp" />
+
+    <TextView
+        android:id="@+id/bus_num"
+        android:layout_width="131dp"
+        android:layout_height="49dp"
+        android:text="컨디션"
+        android:textSize="27sp"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="48dp"
+        tools:layout_editor_absoluteY="74dp" />
+
+    <TextView
+        android:id="@+id/bus_num2"
+        android:layout_width="139dp"
+        android:layout_height="41dp"
+        android:text="(버스번호)"
+        android:textSize="27sp"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="97dp"
+        tools:layout_editor_absoluteY="33dp" />
 
 </android.support.constraint.ConstraintLayout>
