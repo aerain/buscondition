@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:gravity="center_vertical"
+    android:background="@color/colorPrimary"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageButton
+        android:id="@+id/menu"
+        android:layout_alignParentLeft="true"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:background="@drawable/menu" />
+    <RelativeLayout
+        android:id="@+id/REFReLayTellFriend"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_toRightOf="@id/menu"
+        android:layout_toLeftOf="@id/edit">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="8dp"
+            android:gravity="center_vertical"
+            android:id="@+id/search_bus"
+            android:background="@drawable/edit_text_border"
+            android:hint="버스,정류장 검색"
+            android:paddingLeft="8dp"
+            android:textColor="@color/lightGray"
+            android:inputType="text"/>
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edit_text_cancel"
+            android:layout_alignRight="@+id/search_bus"
+            android:layout_marginTop="13dp"
+            android:layout_marginRight="8dp"
+            android:visibility="gone"
+            android:id="@+id/edit_text_cancel"/>
+    </RelativeLayout>
+
+    <Button
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_alignParentRight="true"
+        android:background="@color/colorPrimary"
+        android:id="@+id/edit"
+        android:text="편집"
+        android:textSize="23sp"
+        android:textColor="@android:color/white"/>
+
+
+
+
+</RelativeLayout>
