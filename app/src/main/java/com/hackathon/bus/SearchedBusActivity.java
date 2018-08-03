@@ -9,14 +9,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageButton;
-
-<<<<<<< HEAD
 import com.hackathon.bus.BusSystemAPI.BusAPI;
 
-public class SearchedBusActivity extends AppCompatActivity {
-=======
 public class SearchedBusActivity extends AppCompatActivity implements View.OnClickListener{
->>>>>>> d84864e4d685dbca0dfdbf0d76da3c6b7d183fc2
 
     private String start;
     private String end;
@@ -33,7 +28,6 @@ public class SearchedBusActivity extends AppCompatActivity implements View.OnCli
         cutomActionBar();
         initView();
 
-<<<<<<< HEAD
         new Thread() {
             @Override
             public void run() {
@@ -41,10 +35,6 @@ public class SearchedBusActivity extends AppCompatActivity implements View.OnCli
                 busapi.getBusPos();
             }
         }.start();
-
-
-
-=======
 
     }
     //cutomactionBar설정
@@ -76,9 +66,8 @@ public class SearchedBusActivity extends AppCompatActivity implements View.OnCli
 
     @Override
     public void onClick(View v) {
-        if (v.getId()==R.id.backspace){
+        if (v.getId()==R.id.backspace) {
             finish();
         }
->>>>>>> d84864e4d685dbca0dfdbf0d76da3c6b7d183fc2
     }
 }
