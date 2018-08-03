@@ -26,14 +26,11 @@
         <activity android:name=".SearchedInfoActivity" />
         <activity android:name=".SearchedBusActivity" />
         <activity android:name=".EditMainActivity" />
-<<<<<<< HEAD
         <activity android:name=".NowBus_Info"></activity>
-=======
         <activity
             android:name=".MenuActivity"
             android:label="@string/title_activity_menu"
             android:theme="@style/AppTheme.NoActionBar"></activity>
->>>>>>> 51051aa0e8898621a682d4debacf224ff3f2ff0d
     </application>
     <uses-permission android:name="android.permission.INTERNET"/>
 
