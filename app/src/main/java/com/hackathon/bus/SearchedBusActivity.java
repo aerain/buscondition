@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.hackathon.bus.BusSystemAPI.BusAPI;
+
 public class SearchedBusActivity extends AppCompatActivity {
 
     String start;
@@ -18,6 +20,16 @@ public class SearchedBusActivity extends AppCompatActivity {
         end=intent.getStringExtra("end");
 
         Log.e(start,end);
+
+        new Thread() {
+            @Override
+            public void run() {
+                BusAPI busapi = new BusAPI();
+                busapi.getBusPos();
+            }
+        }.start();
+
+
 
     }
 }

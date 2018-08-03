@@ -27,5 +27,6 @@
         <activity android:name=".SearchedBusActivity" />
         <activity android:name=".EditMainActivity"></activity>
     </application>
+    <uses-permission android:name="android.permission.INTERNET"/>
 
 </manifest>
