@@ -17,6 +17,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.hackathon.bus.Adapter.FavoriteRecyclerViewAdapter;
@@ -33,10 +34,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private RecyclerView favoritBus;
     private FavoritBusVo busVO;
     private Button findBus,edit;
+    private LinearLayout linearLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        linearLayout=findViewById(R.id.l1);
         setContentView(R.layout.activity_main);
 
         cutomActionBar();

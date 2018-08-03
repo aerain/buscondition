@@ -9,10 +9,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
+import android.widget.ImageButton;
 
-public class SearchedInfoActivity extends AppCompatActivity {
+public class SearchedInfoActivity extends AppCompatActivity implements View.OnClickListener{
 
     private String name;
+    private ImageButton btn;
     //버스나 정류장 검색했을때 나오는 액티비티
 
     @Override
@@ -23,9 +25,11 @@ public class SearchedInfoActivity extends AppCompatActivity {
         Intent intent=getIntent();
         name=intent.getStringExtra("searchStr");
         Log.e("안농",name);
+        cutomActionBar();
+        initView();
     }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    //cutomactionBar설정
+    public void cutomActionBar(){
         ActionBar actionBar = getSupportActionBar();
 
         // Custom Actionbar를 사용하기 위해 CustomEnabled을 true 시키고 필요 없는 것은 false 시킨다
@@ -45,8 +49,16 @@ public class SearchedInfoActivity extends AppCompatActivity {
         Toolbar parent = (Toolbar)actionbar.getParent();
         parent.setContentInsetsAbsolute(0,0);
 
-
-        return true;
+    }
+    public void initView(){
+        btn=findViewById(R.id.backspace);
+        btn.setOnClickListener(this);
     }
 
+    @Override
+    public void onClick(View v) {
+        if(v.getId()==R.id.backspace){
+            finish();
+        }
+    }
 }
