@@ -25,7 +25,8 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".SearchedInfoActivity" />
         <activity android:name=".SearchedBusActivity" />
-        <activity android:name=".EditMainActivity"></activity>
+        <activity android:name=".EditMainActivity" />
+        <activity android:name=".NowBus_Info"></activity>
     </application>
 
 </manifest>
