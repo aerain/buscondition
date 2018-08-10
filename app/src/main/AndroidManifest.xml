@@ -26,6 +26,7 @@
         <activity android:name=".SearchedInfoActivity" />
         <activity android:name=".SearchedBusActivity" />
         <activity android:name=".EditMainActivity" />
+        <activity android:name=".NowBus_Info"></activity>
         <activity
             android:name=".MenuActivity"
             android:label="@string/title_activity_menu"
