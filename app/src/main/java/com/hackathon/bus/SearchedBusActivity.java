@@ -11,11 +11,15 @@ import android.view.View;
 import android.widget.ImageButton;
 import com.hackathon.bus.BusSystemAPI.BusAPI;
 
+import com.hackathon.bus.BusSystemAPI.SearchBusAPI;
+
 public class SearchedBusActivity extends AppCompatActivity implements View.OnClickListener{
 
-    private String start;
-    private String end;
+    //출발지 목적지 검색했을때 나오는 액티비티
+    private String start,startX,startY;
+    private String end,endX,endY;
     private ImageButton btn;
+    private SearchBusAPI searchBusAPI;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,7 +28,21 @@ public class SearchedBusActivity extends AppCompatActivity implements View.OnCli
         start=intent.getStringExtra("start");
         end=intent.getStringExtra("end");
 
-        Log.e(start,end);
+
+
+        new Thread() {
+            @Override
+            public void run() {
+                searchBusAPI=new SearchBusAPI(start,end);
+                endX=searchBusAPI.getEndX();
+                endY=searchBusAPI.getEndY();
+                startX=searchBusAPI.getStartX();
+                startY=searchBusAPI.getStartY();
+                Log.e("endx",endX);
+                Log.e("endY",endY);
+            }
+        }.start();
+
         cutomActionBar();
         initView();
 
