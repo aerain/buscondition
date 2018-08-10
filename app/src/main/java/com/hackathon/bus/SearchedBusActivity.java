@@ -10,30 +10,29 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageButton;
 
-<<<<<<< HEAD
+
 import com.hackathon.bus.BusSystemAPI.BusAPI;
 
-public class SearchedBusActivity extends AppCompatActivity {
-=======
-public class SearchedBusActivity extends AppCompatActivity implements View.OnClickListener{
->>>>>>> d84864e4d685dbca0dfdbf0d76da3c6b7d183fc2
+public class SearchedBusActivity extends AppCompatActivity implements View.OnClickListener {
+
 
     private String start;
     private String end;
     private ImageButton btn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_searched_bus);
-        Intent intent=getIntent();
-        start=intent.getStringExtra("start");
-        end=intent.getStringExtra("end");
+        Intent intent = getIntent();
+        start = intent.getStringExtra("start");
+        end = intent.getStringExtra("end");
 
-        Log.e(start,end);
+        Log.e(start, end);
         cutomActionBar();
         initView();
 
-<<<<<<< HEAD
+
         new Thread() {
             @Override
             public void run() {
@@ -43,12 +42,10 @@ public class SearchedBusActivity extends AppCompatActivity implements View.OnCli
         }.start();
 
 
-
-=======
-
     }
+
     //cutomactionBar설정
-    public void cutomActionBar(){
+    public void cutomActionBar() {
         ActionBar actionBar = getSupportActionBar();
 
         // Custom Actionbar를 사용하기 위해 CustomEnabled을 true 시키고 필요 없는 것은 false 시킨다
@@ -59,26 +56,27 @@ public class SearchedBusActivity extends AppCompatActivity implements View.OnCli
 
 
         //layout을 가지고 와서 actionbar에 포팅을 시킵니다.
-        LayoutInflater inflater = (LayoutInflater)getSystemService(LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
         View actionbar = inflater.inflate(R.layout.back_actionbar, null);
 
         actionBar.setCustomView(actionbar);
 
         //액션바 양쪽 공백 없애기
-        Toolbar parent = (Toolbar)actionbar.getParent();
-        parent.setContentInsetsAbsolute(0,0);
+        Toolbar parent = (Toolbar) actionbar.getParent();
+        parent.setContentInsetsAbsolute(0, 0);
 
     }
-    public void initView(){
-        btn=findViewById(R.id.backspace);
+
+    public void initView() {
+        btn = findViewById(R.id.backspace);
         btn.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
-        if (v.getId()==R.id.backspace){
+        if (v.getId() == R.id.backspace) {
             finish();
         }
->>>>>>> d84864e4d685dbca0dfdbf0d76da3c6b7d183fc2
+
     }
 }
