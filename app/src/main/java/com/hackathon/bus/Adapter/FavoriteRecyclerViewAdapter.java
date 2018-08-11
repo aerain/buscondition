@@ -13,6 +13,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.hackathon.bus.MainActivity;
+import com.hackathon.bus.NowBus_Info;
 import com.hackathon.bus.R;
 import com.hackathon.bus.VO.FavoritBusVo;
 
@@ -40,10 +41,15 @@ public class FavoriteRecyclerViewAdapter extends RecyclerView.Adapter<FavoriteRe
 
     @Override
     public void onBindViewHolder(@NonNull FavoriteViewHolder holder, int position) {
-
         holder.busNumber.setText(provider.getBusNum());
         holder.busInfo.setText(provider.getBusInfo());
-        holder.itemView.setOnClickListener(this);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, NowBus_Info.class);
+                context.startActivity(intent);
+            }
+        });
 
     }
 
@@ -63,6 +69,7 @@ public class FavoriteRecyclerViewAdapter extends RecyclerView.Adapter<FavoriteRe
 
         TextView busNumber;
         TextView busInfo;
+        Context context;
 
 
         public FavoriteViewHolder(View itemView) {
@@ -71,6 +78,7 @@ public class FavoriteRecyclerViewAdapter extends RecyclerView.Adapter<FavoriteRe
             busInfo=itemView.findViewById(R.id.bus_info);
             btn=itemView.findViewById(R.id.delete);
             FavoriteRecyclerViewAdapter.itemView=itemView;
+            context = itemView.getContext();
         }
 
     }

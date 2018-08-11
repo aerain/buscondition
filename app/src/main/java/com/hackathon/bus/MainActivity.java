@@ -42,12 +42,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         linearLayout=findViewById(R.id.l1);
         setContentView(R.layout.activity_main);
 
+
         cutomActionBar();
         initView();
 
         initRecyclerView();
 
     }
+
+
+
 
     //layout view 설정
     public void initView(){
@@ -56,8 +60,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         menu.setOnClickListener(this);
 
         editText=findViewById(R.id.search_bus);
-        editText.setOnFocusChangeListener(this);
-        editText.setOnEditorActionListener(this);
+        editText.setOnClickListener(this);
+
 
         searchStart=findViewById(R.id.start);
         searchEnd=findViewById(R.id.end);
@@ -113,6 +117,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             editText.setText("");
             cancel.setVisibility(View.GONE);
         }
+        if(v.getId()==R.id.search_bus){
+            Intent intent=new Intent(this,NowBus_Info.class);
+            startActivity(intent);
+        }
         if(v.getId()==R.id.swap){
             strStart=searchStart.getText().toString();
             strEnd=searchEnd.getText().toString();
@@ -132,6 +140,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Intent intent=new Intent(this,EditMainActivity.class);
             startActivity(intent);
         }
+
     }
 
     @Override

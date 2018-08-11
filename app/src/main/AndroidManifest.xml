@@ -19,18 +19,17 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
-        <activity
-            android:name=".NavigatorActivity"
-            android:label="@string/title_activity_navigator"
-            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".NowBus_Info" />
         <activity android:name=".SearchedInfoActivity" />
         <activity android:name=".SearchedBusActivity" />
         <activity android:name=".EditMainActivity" />
+
         <activity android:name=".NowBus_Info"></activity>
         <activity
             android:name=".MenuActivity"
             android:label="@string/title_activity_menu"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+      
     </application>
     <uses-permission android:name="android.permission.INTERNET"/>
 </manifest>
