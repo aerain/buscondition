@@ -10,15 +10,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageButton;
 
-
 import com.hackathon.bus.BusSystemAPI.BusAPI;
 
-public class SearchedBusActivity extends AppCompatActivity implements View.OnClickListener {
+import com.hackathon.bus.BusSystemAPI.SearchBusAPI;
+
+public class SearchedBusActivity extends AppCompatActivity implements View.OnClickListener{
 
 
-    private String start;
-    private String end;
+    //출발지 목적지 검색했을때 나오는 액티비티
+    private String start,startX,startY;
+    private String end,endX,endY;
     private ImageButton btn;
+
+    private SearchBusAPI searchBusAPI;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +37,7 @@ public class SearchedBusActivity extends AppCompatActivity implements View.OnCli
         initView();
 
 
+
         new Thread() {
             @Override
             public void run() {
@@ -40,8 +45,6 @@ public class SearchedBusActivity extends AppCompatActivity implements View.OnCli
                 busapi.getBusPos();
             }
         }.start();
-
-
     }
 
     //cutomactionBar설정
@@ -74,9 +77,8 @@ public class SearchedBusActivity extends AppCompatActivity implements View.OnCli
 
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.backspace) {
+        if (v.getId()==R.id.backspace) {
             finish();
         }
-
     }
 }
