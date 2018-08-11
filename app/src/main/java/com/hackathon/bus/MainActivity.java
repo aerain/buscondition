@@ -118,7 +118,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             cancel.setVisibility(View.GONE);
         }
         if(v.getId()==R.id.search_bus){
-            Intent intent=new Intent(this,NowBus_Info.class);
+            Intent intent=new Intent(this,bus_resuit_window.class);
             startActivity(intent);
         }
         if(v.getId()==R.id.swap){

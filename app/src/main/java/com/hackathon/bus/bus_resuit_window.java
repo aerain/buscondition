@@ -1,4 +1,5 @@
 package com.hackathon.bus;
+
 import android.app.SearchManager;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -19,7 +20,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 
-public class bus_lists extends AppCompatActivity {
+public class bus_resuit_window extends AppCompatActivity {
     MenuItem mSearch;
     ImageView mCloseButton;
     SearchView searchView;
@@ -64,7 +65,7 @@ public class bus_lists extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.search_window_menu, menu);
         mSearch = menu.findItem(R.id.search);
-        mCloseButton = (ImageView) findViewById(R.id.search_close_btn);
+
 
 
         mSearch.setOnActionExpandListener(new MenuItem.OnActionExpandListener() {
@@ -105,8 +106,6 @@ public class bus_lists extends AppCompatActivity {
                 TextView text = (TextView) findViewById(R.id.txtresult);
                 text.setText(" 겸색결과: " + query);
 
-
-                Toast.makeText(bus_lists.this, query , Toast.LENGTH_SHORT).show();
                 return true;
             }
 

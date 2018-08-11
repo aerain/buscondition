@@ -24,7 +24,7 @@
         <activity android:name=".SearchedBusActivity" />
         <activity android:name=".EditMainActivity" />
 
-        <activity android:name=".NowBus_Info"></activity>
+        <activity android:name=".bus_resuit_window"></activity>
         <activity
             android:name=".MenuActivity"
             android:label="@string/title_activity_menu"
