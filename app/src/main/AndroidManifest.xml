@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.hackathon.bus">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -26,11 +28,12 @@
         <activity android:name=".SearchedInfoActivity" />
         <activity android:name=".SearchedBusActivity" />
         <activity android:name=".EditMainActivity" />
-        <activity android:name=".NowBus_Info"></activity>
+        <activity android:name=".NowBus_Info" />
         <activity
             android:name=".MenuActivity"
             android:label="@string/title_activity_menu"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".BusResultWindow"></activity>
     </application>
-    <uses-permission android:name="android.permission.INTERNET"/>
+
 </manifest>

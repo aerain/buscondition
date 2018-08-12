@@ -1,5 +1,7 @@
 package com.hackathon.bus.BusSystemAPI;
 
+import android.util.Log;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -9,6 +11,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 public class SearchBusAPI {
+
     private String strStart;
     private String strEnd;
     private String startX;
@@ -23,17 +26,26 @@ public class SearchBusAPI {
         this.strEnd = strEnd;
     }
 
-    private static String getTagValue(String tag, Element eElement) {
-        NodeList nlList = eElement.getElementsByTagName(tag).item(0).getChildNodes();
-        Node nValue = (Node) nlList.item(0);
-        if (nValue == null)
+    private static String[] getTagValue(Element eElement) {
+        // tag = gpsX, gpsY
+
+        NodeList nlListX = eElement.getElementsByTagName("gpsX").item(0).getChildNodes();
+        NodeList nlListY = eElement.getElementsByTagName("gpsY").item(0).getChildNodes();
+        Node nValueX = (Node) nlListX.item(0);
+        Node nValueY = (Node) nlListY.item(0);
+        if (nValueX == null)
             return null;
-        return nValue.getNodeValue();
+
+        String[] gpsCoord = {nValueX.getNodeValue(), nValueY.getNodeValue()};
+        return gpsCoord;
     }
 
-    private String xmlParser(String str, String tag) {
-        String result = "";
+    private String[] xmlParser(String str) {
+
+        String[] result = null;
+        long before = System.currentTimeMillis();
         try {
+
             // parsing할 url 지정(API 키 포함해서)
             String url = "http://ws.bus.go.kr/api/rest/pathinfo/getLocationInfo?ServiceKey=K0Fwq0uxVP8aJKAmam5CtRdKH%2FWZmICcq9yRMQJq11IfQrif2GOZd106cle42eMW2npQ%2BFKaxVfQ731XWaWsUQ%3D%3D&stSrch=" + str;
             DocumentBuilderFactory dbFactoty = DocumentBuilderFactory.newInstance();
@@ -50,38 +62,44 @@ public class SearchBusAPI {
             if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 
                 Element eElement = (Element) nNode;
-                result = getTagValue(tag, eElement);
+                result = getTagValue(eElement);
 
             }
-
 
         } catch (Exception e) {
             e.printStackTrace();
         }    // try~catch end
+
+        long after = System.currentTimeMillis();
+
+        long processingTime = after - before;
+
+        Log.i("개빡치네", processingTime + " ms");
         return result;
     }
 
-    public String getEndX() {
-        endX = xmlParser(strEnd, "gpsX");
-        return endX;
+    public String[] getGPS(String str) {
+        String[] gpsCoord = xmlParser(str);
+        return gpsCoord;
     }
-
-    public String getStartX() {
-        startX = xmlParser(strStart, "gpsX");
-        return startX;
-    }
-
-    public String getEndY() {
-        endY = xmlParser(strEnd, "gpsY");
-        return endY;
-    }
-
-    public String getStartY() {
-        startY = xmlParser(strStart, "gpsY");
-        return startY;
-    }
-
-    
-
+//    public String getEnd() {
+//        endX = xmlParser(strEnd, "gpsX");
+//        return endX;
+//    }
+//
+//    public String getStartX() {
+//        startX = xmlParser(strStart, "gpsX");
+//        return startX;
+//    }
+//
+//    public String getEndY() {
+//        endY = xmlParser(strEnd, "gpsY");
+//        return endY;
+//    }
+//
+//    public String getStartY() {
+//        startY = xmlParser(strStart, "gpsY");
+//        return startY;
+//    }
 
 }

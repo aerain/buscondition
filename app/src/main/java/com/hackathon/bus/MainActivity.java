@@ -20,7 +20,14 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
 import com.hackathon.bus.Adapter.FavoriteRecyclerViewAdapter;
+import com.hackathon.bus.BusSystemAPI.SearchBusStation;
 import com.hackathon.bus.VO.FavoritBusVo;
 
 import java.util.ArrayList;
@@ -46,7 +53,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         initView();
 
         initRecyclerView();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                SearchBusStation s=new SearchBusStation();
+                s.xmlParser_station("가산동종점");
+                s.xmlParser_direction();
+                try{
+                    HttpURLConnection conn;
+                    BufferedReader br;
+                    String json;
 
+                    URL url = new URL("http://117.17.102.139:3000/getBusTime?arsid=21111");
+                    conn = (HttpURLConnection) url.openConnection();
+                    conn.setRequestMethod("GET");
+                    br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+
+                    json = br.readLine();
+                    json = json.replaceAll("&#34;","\"");
+                    System.out.println(json);
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }).start();
     }
 
     //layout view 설정
@@ -58,6 +90,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         editText=findViewById(R.id.search_bus);
         editText.setOnFocusChangeListener(this);
         editText.setOnEditorActionListener(this);
+        editText.setOnClickListener(this);
 
         searchStart=findViewById(R.id.start);
         searchEnd=findViewById(R.id.end);
@@ -73,6 +106,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         edit=findViewById(R.id.edit);
         edit.setOnClickListener(this);
+
+
 
     }
     //cutomactionBar설정
@@ -107,6 +142,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
+
     @Override
     public void onClick(View v) {
         if(v.getId()==R.id.edit_text_cancel){
@@ -130,6 +166,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         if(v.getId()==R.id.edit){
             Intent intent=new Intent(this,EditMainActivity.class);
+            startActivity(intent);
+        }
+        if(v.getId()==R.id.search_bus){
+            Intent intent=new Intent(this,BusResultWindow.class);
             startActivity(intent);
         }
     }
@@ -159,3 +199,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 }
+
+
