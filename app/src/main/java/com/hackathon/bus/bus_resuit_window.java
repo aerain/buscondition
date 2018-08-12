@@ -17,6 +17,9 @@ import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.hackathon.bus.Adapter.BusResultRecyclerViewAdapter;
+import com.hackathon.bus.VO.BusResultVO;
+
 import java.util.ArrayList;
 
 
@@ -32,24 +35,24 @@ public class bus_resuit_window extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bus_result_window);
         setTitle("버스검색창");
-//
-//        mRecyclerView = findViewById(R.id.search_recycler);
-//        mRecyclerView.setHasFixedSize(true);
-//        mLayoutManager = new LinearLayoutManager(this);
-//        mRecyclerView.setLayoutManager(mLayoutManager);
-//
-//        ArrayList<bus_result_item> bus_result_itemsList = new ArrayList<>();
-//        bus_result_itemsList.add(new bus_result_item("360", "제주대학교방면" ,"한라대학교 → 제주대학교"));
-//        bus_result_itemsList.add(new bus_result_item("360", "한라대학교방면","제주대학교 → 한라대학교"));
-//        bus_result_itemsList.add(new bus_result_item("477", "제주대학교순환","제주대학교 → 제주대학교"));
-//        bus_result_itemsList.add(new bus_result_item("477", "제주대학교순환" ,"제주대학교 → 제주대학교"));
-//        bus_result_itemsList.add(new bus_result_item("473", "한라대학교방면","국제대학교 → 한라대학교"));
-//        bus_result_itemsList.add(new bus_result_item("473", "국제대학교방면","한라대학교 → 국제대학교"));
-//        bus_result_itemsList.add(new bus_result_item("365", "제주대학교방면" ,"한라대학교 → 제주대학교"));
-//        bus_result_itemsList.add(new bus_result_item("365", "한라대학교방면","제주대학교 → 한라대학교"));
-//        bus_result_Adapter busResultAdapter= new bus_result_Adapter(bus_result_itemsList);
-//
-//        mRecyclerView.setAdapter(busResultAdapter);
+
+        mRecyclerView = findViewById(R.id.search_recycler);
+        mRecyclerView.setHasFixedSize(true);
+        mLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+
+        ArrayList<BusResultVO> bus_result_itemsList = new ArrayList<>();
+        bus_result_itemsList.add(new BusResultVO("360", "제주대학교방면" ,"한라대학교 → 제주대학교"));
+        bus_result_itemsList.add(new BusResultVO("360", "한라대학교방면","제주대학교 → 한라대학교"));
+        bus_result_itemsList.add(new BusResultVO("477", "제주대학교순환","제주대학교 → 제주대학교"));
+        bus_result_itemsList.add(new BusResultVO("477", "제주대학교순환" ,"제주대학교 → 제주대학교"));
+        bus_result_itemsList.add(new BusResultVO("473", "한라대학교방면","국제대학교 → 한라대학교"));
+        bus_result_itemsList.add(new BusResultVO("473", "국제대학교방면","한라대학교 → 국제대학교"));
+        bus_result_itemsList.add(new BusResultVO("365", "제주대학교방면" ,"한라대학교 → 제주대학교"));
+        bus_result_itemsList.add(new BusResultVO("365", "한라대학교방면","제주대학교 → 한라대학교"));
+        BusResultRecyclerViewAdapter busResultAdapter= new BusResultRecyclerViewAdapter(bus_result_itemsList,this);
+
+        mRecyclerView.setAdapter(busResultAdapter);
 
 
 
