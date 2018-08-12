@@ -1,6 +1,8 @@
 package com.hackathon.bus;
 
+import android.content.AsyncTaskLoader;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,15 +16,20 @@ import com.hackathon.bus.BusSystemAPI.BusAPI;
 
 import com.hackathon.bus.BusSystemAPI.SearchBusAPI;
 
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
+import java.util.Arrays;
+
 public class SearchedBusActivity extends AppCompatActivity implements View.OnClickListener{
 
 
     //출발지 목적지 검색했을때 나오는 액티비티
-    private String start,startX,startY;
-    private String end,endX,endY;
+    private String start, startX, startY;
+    private String end, endX, endY;
     private ImageButton btn;
-
-    private SearchBusAPI searchBusAPI;
+//    private SearchBusAPI searchBusAPI;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,19 +39,26 @@ public class SearchedBusActivity extends AppCompatActivity implements View.OnCli
         start = intent.getStringExtra("start");
         end = intent.getStringExtra("end");
 
-        Log.e(start, end);
-        cutomActionBar();
-        initView();
+        XmlAsyncTask xmlAsyncTask =new XmlAsyncTask();
+        xmlAsyncTask.execute();
 
-
-
-        new Thread() {
-            @Override
-            public void run() {
-                BusAPI busapi = new BusAPI();
-                busapi.getBusPos();
-            }
-        }.start();
+//        new Thread() {
+//            @Override
+//            public void run() {
+//
+//            }
+//        }.start();
+//
+//        cutomActionBar();
+//        initView();
+//
+//        new Thread() {
+//            @Override
+//            public void run() {
+//                BusAPI busapi = new BusAPI();
+//                busapi.getBusPos();
+//            }
+//        }.start();
     }
 
     //cutomactionBar설정
@@ -77,8 +91,40 @@ public class SearchedBusActivity extends AppCompatActivity implements View.OnCli
 
     @Override
     public void onClick(View v) {
-        if (v.getId()==R.id.backspace) {
+        if (v.getId() == R.id.backspace) {
             finish();
+        }
+    }
+
+
+    private class XmlAsyncTask extends AsyncTask<Void,Void,Void> {
+
+        private String strStart;
+        private String strEnd;
+        private String startX;
+        private String startY;
+        private String endX;
+        private String endY;
+        private String[] endCoord;
+        private String[] startCoord;
+
+
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            SearchBusAPI searchBusAPI = new SearchBusAPI(start, end);
+            endCoord = searchBusAPI.getGPS(end);
+            startCoord = searchBusAPI.getGPS(start);
+            return null;
+    }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+
+
+            Log.e("endCoord", Arrays.toString(endCoord));
+            Log.e("startCoord", Arrays.toString(startCoord));
+
         }
     }
 }
