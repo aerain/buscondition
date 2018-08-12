@@ -30,7 +30,8 @@
             android:hint="버스,정류장 검색"
             android:inputType="text"
             android:paddingLeft="8dp"
-            android:textColor="@color/lightGray" />
+            android:textColor="@color/lightGray"
+            android:focusableInTouchMode="false"/>
 
         <ImageButton
             android:id="@+id/edit_text_cancel"

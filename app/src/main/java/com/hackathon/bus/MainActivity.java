@@ -54,32 +54,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         initView();
 
         initRecyclerView();
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                SearchBusStation s=new SearchBusStation();
-                s.xmlParser_station("가산동종점");
-                s.xmlParser_direction();
-                try{
-                    HttpURLConnection conn;
-                    BufferedReader br;
-                    String json;
 
-                    URL url = new URL("http://117.17.102.139:3000/getBusTime?arsid=21111");
-                    conn = (HttpURLConnection) url.openConnection();
-                    conn.setRequestMethod("GET");
-                    br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-
-                    json = br.readLine();
-                    json = json.replaceAll("&#34;","\"");
-                    System.out.println(json);
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-            }
-        }).start();
     }
 
 
@@ -177,16 +152,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(intent);
         }
         if(v.getId()==R.id.search_bus){
-            Intent intent=new Intent(this,bus_resuit_window.class);
+            Intent intent =new Intent(this,bus_resuit_window.class);
             startActivity(intent);
         }
+
     }
 
     @Override
     public void onFocusChange(View v, boolean hasFocus) {
         if(hasFocus){
             if (v.getId()==R.id.search_bus){
-                cancel.setVisibility(View.VISIBLE);
+                Intent intent=new Intent(this,bus_resuit_window.class);
+                startActivity(intent);
 
             }
         }

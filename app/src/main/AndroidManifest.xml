@@ -26,6 +26,7 @@
         <activity android:name=".SearchedBusActivity" />
         <activity android:name=".EditMainActivity" />
         <activity android:name=".bus_resuit_window" />
+        <activity android:name=".StationInfoActivity"></activity>
     </application>
 
 </manifest>

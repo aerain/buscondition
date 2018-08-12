@@ -8,6 +8,7 @@ import org.xmlpull.v1.XmlPullParserFactory;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class SearchBusStation {
@@ -132,7 +133,7 @@ public class SearchBusStation {
                 StationVO node = Station.get(i);
                 String arsidStr = node.getsNum();
 
-                URL url_staton = new URL("http://ws.bus.go.kr/api/rest/stationinfo/getStationByUid?serviceKey=60io4%2B%2BLsPCgnJcw%2B1%2FufoEFwxNyyxiYIL1j9eqjqmr6OclPIxkGFXsUt%2FkY2dvAtaWXh3KzyEns%2BLVujevEww%3D%3D&arsId=" + arsidStr);
+                URL url_staton = new URL("http://ws.bus.go.kr/api/rest/stationinfo/getStationByUid?serviceKey=VMghKs9fVquT46AcdPPuX1w7Nmw%2Bs0qghGvcuuFuQDhRSTW%2FSMhziZs4s9MSrN4F20rZXJWZvQwfdOiJdaMzZg%3D%3D&arsId=" + arsidStr);
                 InputStream direction = url_staton.openStream();
 
                 xpp_direction.setInput(new InputStreamReader(direction, "UTF-8"));
@@ -206,7 +207,7 @@ public class SearchBusStation {
 
     }
 
-    public String xmlParser_Bus(){
+    public String xmlParser_Bus(String arsId){
 
         StringBuffer buffer = new StringBuffer();
 
@@ -215,13 +216,13 @@ public class SearchBusStation {
             XmlPullParserFactory factory_bus = XmlPullParserFactory.newInstance();
             XmlPullParser xpp_bus = factory_bus.newPullParser();
 
-            URL url_bus = new URL("http://ws.bus.go.kr/api/rest/stationinfo/getStationByUid?serviceKey=60io4%2B%2BLsPCgnJcw%2B1%2FufoEFwxNyyxiYIL1j9eqjqmr6OclPIxkGFXsUt%2FkY2dvAtaWXh3KzyEns%2BLVujevEww%3D%3D&arsId=21111");
+            URL url_bus = new URL("http://ws.bus.go.kr/api/rest/stationinfo/getStationByUid?serviceKey=VMghKs9fVquT46AcdPPuX1w7Nmw%2Bs0qghGvcuuFuQDhRSTW%2FSMhziZs4s9MSrN4F20rZXJWZvQwfdOiJdaMzZg%3D%3D&arsId=" + arsId);
             InputStream station = url_bus.openStream();
 
             xpp_bus.setInput(new InputStreamReader(station, "UTF-8"));
 
             int eventType = xpp_bus.getEventType();
-            String rtNm = "", busRouteId = "", traTime1 = "", traTime2 = "", vehId1 = "", vehId2 = "", sectOrd1 = "", sectOrd2 = "", staOrd = "", term = "";
+            String rtNm = "", busRouteId = "", traTime1 = "", traTime2 = "", arrmsg1 = "", arrmsg2 = "", vehId1 = "", vehId2 = "", sectOrd1 = "", sectOrd2 = "", staOrd = "", term = "";
             String tag_bus;
 
             while (eventType != XmlPullParser.END_DOCUMENT){
@@ -256,7 +257,7 @@ public class SearchBusStation {
                             buffer.append("첫번째 도착메세지 : ");
                             xpp_bus.next();
                             buffer.append(xpp_bus.getText());
-                            //traTime1 = xpp_bus.getText();
+                            arrmsg1 = xpp_bus.getText();
                             buffer.append("\n");
                         }
 
@@ -264,7 +265,7 @@ public class SearchBusStation {
                             buffer.append("두번째 도착메세지 : ");
                             xpp_bus.next();
                             buffer.append(xpp_bus.getText());
-                            //traTime1 = xpp_bus.getText();
+                            arrmsg2 = xpp_bus.getText();
                             buffer.append("\n");
                         }
 
@@ -346,7 +347,7 @@ public class SearchBusStation {
                     case XmlPullParser.END_TAG:
                         tag_bus = xpp_bus.getName();
                         if(tag_bus.equals("itemList")) {
-                            BusVO node = new BusVO(rtNm, busRouteId, traTime1, traTime2, vehId1, vehId2, sectOrd1, sectOrd2, staOrd, term);
+                            BusVO node = new BusVO(rtNm, busRouteId, traTime1, traTime2, arrmsg1,arrmsg2, vehId1, vehId2, sectOrd1, sectOrd2,  staOrd, term);
                             System.out.println(node.getBusNumber());
                             Bus.add(node);
                         }
@@ -432,7 +433,10 @@ public class SearchBusStation {
 
     }
 
-
-
-
+    public LinkedList<BusVO> getBus() {
+        return Bus;
+    }
+    public LinkedList<StationVO> getStation(){
+        return Station;
+    }
 }

@@ -1,6 +1,6 @@
 package com.hackathon.bus.VO;
 
-import com.hackathon.bus.BusSystemAPI.Congestion;
+//import com.hackathon.bus.BusSystemAPI.Congestion;
 
 public class BusVO {
 
@@ -8,6 +8,8 @@ public class BusVO {
     private String BusRouteId;
     private String ArriveTime1;
     private String ArriveTime2;
+    private String ArrMsg1;
+    private String ArrMsg2;
     private String VehicleId1;
     private String VehicleId2;
     private String SectionOrder1;
@@ -20,12 +22,14 @@ public class BusVO {
 
     private String Congestion;
 
-    public BusVO(String rtNm, String busRouteId, String traTime1, String traTime2, String vehId1, String vehId2, String sectOrd1, String sectOrd2, String staOrd, String term){
+    public BusVO(String rtNm, String busRouteId, String traTime1, String traTime2, String arrmsg1, String arrmsg2, String vehId1, String vehId2, String sectOrd1, String sectOrd2, String staOrd, String term){
 
         BusNumber = rtNm;
         BusRouteId = busRouteId;
         ArriveTime1 = traTime1;
         ArriveTime2 = traTime2;
+        ArrMsg1 = arrmsg1;
+        ArrMsg2 = arrmsg2;
         VehicleId1 = vehId1;
         VehicleId2 = vehId2;
         SectionOrder1 = sectOrd1;
@@ -33,6 +37,14 @@ public class BusVO {
         StationOrder = staOrd;
         Busterm = term;
 
+    }
+
+    public String getArrMsg1() {
+        return ArrMsg1;
+    }
+
+    public String getArrMsg2() {
+        return ArrMsg2;
     }
 
     public String getBusNumber() {

@@ -1,26 +1,24 @@
 package com.hackathon.bus;
 
-import android.app.SearchManager;
-import android.content.Intent;
+import android.content.Context;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.hackathon.bus.Adapter.BusResultRecyclerViewAdapter;
-import com.hackathon.bus.VO.BusResultVO;
+import com.hackathon.bus.Adapter.StationResultRecyclerViewAdapter;
+import com.hackathon.bus.BusSystemAPI.SearchBusStation;
+import com.hackathon.bus.VO.StationVO;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 
 public class bus_resuit_window extends AppCompatActivity {
@@ -29,6 +27,10 @@ public class bus_resuit_window extends AppCompatActivity {
     SearchView searchView;
     RecyclerView mRecyclerView;
     RecyclerView.LayoutManager mLayoutManager;
+    private String str;
+    private LinkedList<StationVO> vos;
+    StationResultRecyclerViewAdapter busResultAdapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,20 +43,7 @@ public class bus_resuit_window extends AppCompatActivity {
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        ArrayList<BusResultVO> bus_result_itemsList = new ArrayList<>();
-        bus_result_itemsList.add(new BusResultVO("360", "제주대학교방면" ,"한라대학교 → 제주대학교"));
-        bus_result_itemsList.add(new BusResultVO("360", "한라대학교방면","제주대학교 → 한라대학교"));
-        bus_result_itemsList.add(new BusResultVO("477", "제주대학교순환","제주대학교 → 제주대학교"));
-        bus_result_itemsList.add(new BusResultVO("477", "제주대학교순환" ,"제주대학교 → 제주대학교"));
-        bus_result_itemsList.add(new BusResultVO("473", "한라대학교방면","국제대학교 → 한라대학교"));
-        bus_result_itemsList.add(new BusResultVO("473", "국제대학교방면","한라대학교 → 국제대학교"));
-        bus_result_itemsList.add(new BusResultVO("365", "제주대학교방면" ,"한라대학교 → 제주대학교"));
-        bus_result_itemsList.add(new BusResultVO("365", "한라대학교방면","제주대학교 → 한라대학교"));
-        BusResultRecyclerViewAdapter busResultAdapter= new BusResultRecyclerViewAdapter(bus_result_itemsList,this);
-
-        mRecyclerView.setAdapter(busResultAdapter);
-
-
+        vos=new LinkedList<>();
 
 
     }
@@ -108,6 +97,10 @@ public class bus_resuit_window extends AppCompatActivity {
             public boolean onQueryTextSubmit(String query) {
                 TextView text = (TextView) findViewById(R.id.txtresult);
                 text.setText(" 겸색결과: " + query);
+                StationAsyncTask task=new StationAsyncTask(query);
+                task.execute();
+                vos=task.getBus();
+                mRecyclerView.setVisibility(View.VISIBLE);
 
                 return true;
             }
@@ -126,34 +119,62 @@ public class bus_resuit_window extends AppCompatActivity {
         mSearch.expandActionView();
         return true;
     }
+    public Context getContext(){
+
+        Context context=this;
+        return context;
+    }
+    class StationAsyncTask extends AsyncTask<Void,Void,Void>{
+
+        String str;
+        SearchBusStation s;
+        Context context;
+        public StationAsyncTask(String str){
+            this.str=str;
+            context=new bus_resuit_window();
+        }
+        private LinkedList<StationVO> vos;
+        @Override
+        protected Void doInBackground(Void... voids) {
+            s=new SearchBusStation();
+            s.xmlParser_station(str);
+            s.xmlParser_direction();
+//            try{
+//                HttpURLConnection conn;
+//                BufferedReader br;
+//                String json;
+//
+//                URL url = new URL("http://117.17.102.139:3000/getBusTime?arsid=21111");
+//                conn = (HttpURLConnection) url.openConnection();
+//                conn.setRequestMethod("GET");
+//                br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+//
+//                json = br.readLine();
+//                json = json.replaceAll("&#34;","\"");
+//                System.out.println(json);
+//
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            vos=s.getStation();
+
+            context=getContext();
+            busResultAdapter= new StationResultRecyclerViewAdapter(vos,context);
+            mRecyclerView.setAdapter(busResultAdapter);
+            mRecyclerView.setVisibility(View.VISIBLE);
+
+        }
+        public LinkedList getBus(){
+            return vos;
+        }
+    }
 }
 
 
-
-//    // 검색 확장,축소를 버튼으로 생성
-//    public void mOnClick(View v) {
-//        switch (v.getId()) {
-//            case R.id.btnexpand:
-//                mSearch.expandActionView();
-//                break;
-//            case R.id.btncollapse:
-//                mSearch.collapseActionView();
-//                break;
-//        }
-//
-//    }
-
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        switch (item.getItemId()){
-//            case android.R.id.closeButton:{
-////                onBackPressed();
-//                Log.e("여기가","실행은돼?");
-//                finish();
-//
-//                break;
-//            }
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
-//}

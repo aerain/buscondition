@@ -11,9 +11,13 @@ import android.widget.TextView;
 
 import com.hackathon.bus.NowBus_Info;
 import com.hackathon.bus.R;
+import com.hackathon.bus.StationInfoActivity;
 import com.hackathon.bus.VO.BusResultVO;
+import com.hackathon.bus.VO.BusVO;
+import com.hackathon.bus.VO.StationVO;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 /**
  * Created by kim on 2018-08-12.
@@ -22,20 +26,25 @@ import java.util.ArrayList;
 public class BusResultRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context context;
     public static class BusResultViewHolder extends RecyclerView.ViewHolder {
-        TextView bus_num;
-        TextView bus_docha;
-        TextView bus_go_end;
+        TextView bNum;
+        TextView bDirection;
+        TextView bFirstArrive;
+        TextView bSecondArrive;
+        TextView bCongetion;
 
         BusResultViewHolder(View view) {
             super(view);
-            bus_num = view.findViewById(R.id.bus_num);
-            bus_docha = view.findViewById(R.id.bus_docha);
-            bus_go_end = view.findViewById(R.id.bus_go_end);
+            bNum = view.findViewById(R.id.bus_num);
+            bDirection = view.findViewById(R.id.bus_direction);
+            bFirstArrive = view.findViewById(R.id.first_arrive);
+            bSecondArrive=view.findViewById(R.id.second_arrive);
+            bCongetion=view.findViewById(R.id.congetion);
+
         }
 
     }
-    private ArrayList<BusResultVO> bus_result_itemsList;
-    public BusResultRecyclerViewAdapter(ArrayList<BusResultVO> bus_result_itemsList,Context context){
+    private LinkedList<BusVO> bus_result_itemsList;
+    public BusResultRecyclerViewAdapter(LinkedList<BusVO> bus_result_itemsList, Context context){
         this.bus_result_itemsList = bus_result_itemsList;
         this.context=context;
     }
@@ -51,20 +60,13 @@ public class BusResultRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerV
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
 
-        BusResultViewHolder bus_result_viewHolder = (BusResultViewHolder) holder;
+        final BusResultViewHolder bus_result_viewHolder = (BusResultViewHolder) holder;
 
-        bus_result_viewHolder.bus_num.setText(bus_result_itemsList.get(position).getBus_num());
-        bus_result_viewHolder.bus_docha.setText(bus_result_itemsList.get(position).getBus_docha());
-        bus_result_viewHolder.bus_go_end.setText(bus_result_itemsList.get(position).getBus_go_end());
+        bus_result_viewHolder.bNum.setText(bus_result_itemsList.get(position).getBusNumber());
+        bus_result_viewHolder.bCongetion.setText(bus_result_itemsList.get(position).getCongestion());
+        bus_result_viewHolder.bFirstArrive.setText(bus_result_itemsList.get(position).getArrMsg1());
+        bus_result_viewHolder.bSecondArrive.setText(bus_result_itemsList.get(position).getArrMsg2());
 
-        bus_result_viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent =new Intent(context,NowBus_Info.class);
-                intent.putExtra("BusNum",bus_result_itemsList.get(position).getBus_num());
-                context.startActivity(intent);
-            }
-        });
 
     }
 
