@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageButton;
+
 import com.hackathon.bus.BusSystemAPI.BusAPI;
 
 import com.hackathon.bus.BusSystemAPI.SearchBusAPI;
@@ -22,6 +23,7 @@ import org.w3c.dom.NodeList;
 import java.util.Arrays;
 
 public class SearchedBusActivity extends AppCompatActivity implements View.OnClickListener{
+
 
     //출발지 목적지 검색했을때 나오는 액티비티
     private String start, startX, startY;
@@ -36,7 +38,6 @@ public class SearchedBusActivity extends AppCompatActivity implements View.OnCli
         Intent intent = getIntent();
         start = intent.getStringExtra("start");
         end = intent.getStringExtra("end");
-
 
         XmlAsyncTask xmlAsyncTask =new XmlAsyncTask();
         xmlAsyncTask.execute();
@@ -58,7 +59,6 @@ public class SearchedBusActivity extends AppCompatActivity implements View.OnCli
 //                busapi.getBusPos();
 //            }
 //        }.start();
-
     }
 
     //cutomactionBar설정
@@ -128,4 +128,3 @@ public class SearchedBusActivity extends AppCompatActivity implements View.OnCli
         }
     }
 }
-

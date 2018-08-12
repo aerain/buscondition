@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         linearLayout=findViewById(R.id.l1);
         setContentView(R.layout.activity_main);
 
+
         cutomActionBar();
         initView();
 
@@ -80,6 +81,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }).start();
     }
+
+
+
 
     //layout view 설정
     public void initView(){
@@ -149,6 +153,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             editText.setText("");
             cancel.setVisibility(View.GONE);
         }
+//        if(v.getId()==R.id.search_bus){
+//            Intent intent=new Intent(this,bus_resuit_window.class);
+//            startActivity(intent);
+//        }
         if(v.getId()==R.id.swap){
             strStart=searchStart.getText().toString();
             strEnd=searchEnd.getText().toString();
@@ -169,7 +177,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(intent);
         }
         if(v.getId()==R.id.search_bus){
-            Intent intent=new Intent(this,BusResultWindow.class);
+            Intent intent=new Intent(this,bus_resuit_window.class);
             startActivity(intent);
         }
     }
