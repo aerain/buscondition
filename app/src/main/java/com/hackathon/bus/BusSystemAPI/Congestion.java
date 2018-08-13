@@ -73,7 +73,8 @@ public class Congestion {
 
                     }
                 } else {
-                    congestionList.add(0);
+                    if(congestionList.size() != 0)
+                        congestionList.add(0);
                     System.out.println(congestionList.get(congestionList.size() - 1));
                 }
             }

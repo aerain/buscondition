@@ -17,10 +17,12 @@ import android.widget.TextView;
 
 import com.hackathon.bus.Adapter.BusResultRecyclerViewAdapter;
 import com.hackathon.bus.Adapter.StationResultRecyclerViewAdapter;
+import com.hackathon.bus.BusSystemAPI.Congestion;
 import com.hackathon.bus.BusSystemAPI.SearchBusStation;
 import com.hackathon.bus.VO.BusVO;
 import com.hackathon.bus.VO.StationVO;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class StationInfoActivity extends AppCompatActivity implements View.OnClickListener {
@@ -49,10 +51,12 @@ public class StationInfoActivity extends AppCompatActivity implements View.OnCli
 
         busVOS=new LinkedList<>();
 
-        BusAsyncTask task=new BusAsyncTask(num);
+        BusAsyncTask task=new BusAsyncTask();
         task.execute();
         initView();
         cutomActionBar();
+
+
     }
     private void initView(){
         TextView tname=findViewById(R.id.station_name);
@@ -116,17 +120,21 @@ public class StationInfoActivity extends AppCompatActivity implements View.OnCli
         String str;
         SearchBusStation s;
         Context context;
-        public BusAsyncTask(String str){
-            this.str=str;
-        }
+        Congestion cgn;
+//        public BusAsyncTask(String str){
+//            this.str=str;
+//        }
         private LinkedList<BusVO> vos;
+        private ArrayList<Integer> parseCongestion;
         @Override
         protected Void doInBackground(Void... voids) {
             s=new SearchBusStation();
-            s.xmlParser_station(str);
+            s.xmlParser_station(name);
             s.xmlParser_direction();
             s.xmlParser_Bus(num);
             s.xmlParser_Congestion();
+            cgn = new Congestion();
+            parseCongestion = cgn.parser(num);
 //            try{
 //                HttpURLConnection conn;
 //                BufferedReader br;
@@ -153,8 +161,9 @@ public class StationInfoActivity extends AppCompatActivity implements View.OnCli
             super.onPostExecute(aVoid);
             vos=s.getBus();
 
+            Log.i("원형", parseCongestion.toString());
             context=getContext();
-            busResultAdapter= new BusResultRecyclerViewAdapter(vos,context);
+            busResultAdapter= new BusResultRecyclerViewAdapter(vos, context, parseCongestion);
             mRecyclerView.setAdapter(busResultAdapter);
             mRecyclerView.setVisibility(View.VISIBLE);
 

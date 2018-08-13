@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class FavoritBusVo {
 
-    private String busNum="370";
+    private String busNum="";
     private String busInfo="제주대방면";
 
 

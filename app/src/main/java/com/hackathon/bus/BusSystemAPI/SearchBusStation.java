@@ -416,6 +416,10 @@ public class SearchBusStation {
 
                     eventType = xpp_congestion.next();
                 }
+
+                if(node.getCongestion() == null) {
+                    node.setCongestion("0");
+                }
                 System.out.println("버스번호 : " + node.getBusNumber());
                 System.out.println("차량ID : " + node.getVehicleId1());
                 System.out.println("버스혼잡도 : " + node.getCongestion());
